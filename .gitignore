@@ -1,0 +1,4 @@
+__pycache__/
+
+###> uncomment .env to hide secrets from repository
+# .env
