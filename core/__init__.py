@@ -32,3 +32,21 @@ def create_app():
 
     return app
 """
+from flask import Flask
+from .extensions import db, login_manager
+
+def create_app():
+    app = Flask(__name__)
+    # LOAD <Config.class> from <config.py> into app
+    app.config.from_object('config.Config')
+    
+    # Initialize the EXTENSIONS
+    # mongo.init_app(app, uri= str(os.getenv('MONGO_URI')))
+    db.init_app(app)
+    login_manager.init_app(app)
+
+    # Registrar blueprints
+    from .app1.views import app1 as app1_bp
+    app.register_blueprint(app1_bp, url_prefix='/')
+
+    return app
